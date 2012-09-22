@@ -1,7 +1,5 @@
-﻿namespace MvcMusicStore.Models
-{
-    public class OrderDetail
-    {
+﻿namespace MvcMusicStore.Models {
+    public class OrderDetail {
         public int OrderDetailId { get; set; }
         public int OrderId { get; set; }
         public int AlbumId { get; set; }

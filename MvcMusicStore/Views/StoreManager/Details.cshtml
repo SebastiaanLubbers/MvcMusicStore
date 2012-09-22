@@ -9,27 +9,37 @@
 <fieldset>
     <legend>Album</legend>
 
-    <div class="display-label">Genre</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Genre.Name)
+    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Genre.Name)
     </div>
 
-    <div class="display-label">Artist</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Artist.Name)
+    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Artist.Name)
     </div>
 
-    <div class="display-label">Title</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Title)
     </div>
 
-    <div class="display-label">Price</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Price)
     </div>
 
-    <div class="display-label">AlbumArtUrl</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AlbumArtUrl)
+    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.AlbumArtUrl)
     </div>

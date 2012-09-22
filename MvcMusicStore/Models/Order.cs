@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace MvcMusicStore.Models
 {
     [Bind(Exclude = "OrderId")]
-    public partial class Order
+    public class Order
     {
         [ScaffoldColumn(false)]
         public int OrderId { get; set; }
@@ -17,42 +17,43 @@ namespace MvcMusicStore.Models
         [ScaffoldColumn(false)]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "First Name is required")]
+        [Required]
         [DisplayName("First Name")]
         [StringLength(160)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Last Name is required")]
+        [Required]
         [DisplayName("Last Name")]
         [StringLength(160)]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Address is required")]
-        [StringLength(70)]
+        [Required]
+        [StringLength(70, MinimumLength = 3)]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "City is required")]
+        [Required]
         [StringLength(40)]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "State is required")]
+        [Required]
         [StringLength(40)]
         public string State { get; set; }
 
-        [Required(ErrorMessage = "Postal Code is required")]
+        [Required]
         [DisplayName("Postal Code")]
-        [StringLength(10)]
+        [StringLength(10, MinimumLength = 5)]
         public string PostalCode { get; set; }
 
-        [Required(ErrorMessage = "Country is required")]
+        [Required]
         [StringLength(40)]
         public string Country { get; set; }
 
-        [Required(ErrorMessage = "Phone is required")]
+        [Required]
         [StringLength(24)]
+        [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "Email Address is required")]
+        [Required]
         [DisplayName("Email Address")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",
             ErrorMessage = "Email is is not valid.")]

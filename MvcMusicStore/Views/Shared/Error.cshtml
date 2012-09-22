@@ -1,9 +1,10 @@
-﻿@{
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
     ViewBag.Title = "Error";
 }
- 
-<h2>Error</h2>
- 
-<p>We're sorry, we've hit an unexpected error.
-    <a href="javascript:history.go(-1)">Click here</a> 
-    if you'd like to go back and try that again.</p>
+
+<hgroup class="title">
+    <h1 class="error">Error.</h1>
+    <h2 class="error">An error occurred while processing your request.</h2>
+</hgroup>

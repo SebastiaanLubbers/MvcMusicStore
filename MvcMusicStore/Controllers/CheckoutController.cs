@@ -12,13 +12,12 @@ namespace MvcMusicStore.Controllers
         const string PromoCode = "FREE";
 
         //
-        // GET: /Checkout/AddressAndPayment
+        // GET: /Checkout/
 
         public ActionResult AddressAndPayment()
         {
             return View();
         }
-
         //
         // POST: /Checkout/AddressAndPayment
 
@@ -34,8 +33,7 @@ namespace MvcMusicStore.Controllers
                     StringComparison.OrdinalIgnoreCase) == false)
                 {
                     return View(order);
-                }
-                else
+                } else
                 {
                     order.Username = User.Identity.Name;
                     order.OrderDate = DateTime.Now;
@@ -45,15 +43,14 @@ namespace MvcMusicStore.Controllers
                     storeDB.SaveChanges();
 
                     //Process the order
-                    var cart = ShoppingCart.GetCart(this.HttpContext);
+                    var cart = ShoppingCart.GetCart(storeDB, this.HttpContext);
                     cart.CreateOrder(order);
 
                     return RedirectToAction("Complete",
                         new { id = order.OrderId });
                 }
 
-            }
-            catch
+            } catch
             {
                 //Invalid - redisplay with errors
                 return View(order);
@@ -73,11 +70,13 @@ namespace MvcMusicStore.Controllers
             if (isValid)
             {
                 return View(id);
-            }
-            else
+            } else
             {
                 return View("Error");
             }
         }
+
+
+
     }
 }

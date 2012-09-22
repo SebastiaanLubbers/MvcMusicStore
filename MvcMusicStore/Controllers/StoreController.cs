@@ -5,27 +5,23 @@ using System.Web;
 using System.Web.Mvc;
 using MvcMusicStore.Models;
 
-namespace MvcMusicStore.Controllers
-{
-    public class StoreController : Controller
-    {
+namespace MvcMusicStore.Controllers {
+    public class StoreController : Controller {
         MusicStoreEntities storeDB = new MusicStoreEntities();
-
         //
         // GET: /Store/
 
-        public ActionResult Index()
+        public ActionResult Details(int id) 
         {
-            var genres = storeDB.Genres.ToList();
+            var album = storeDB.Albums.Find(id);
+            if (album == null) {
+                return HttpNotFound();
+            }
 
-            return View(genres);
+            return View(album);
         }
 
-        //
-        // GET: /Store/Browse?genre=Disco
-
-        public ActionResult Browse(string genre)
-        {
+        public ActionResult Browse(string genre) {
             // Retrieve Genre and its Associated Albums from database
             var genreModel = storeDB.Genres.Include("Albums")
                 .Single(g => g.Name == genre);
@@ -33,15 +29,12 @@ namespace MvcMusicStore.Controllers
             return View(genreModel);
         }
 
-        //
-        // GET: /Store/Details/5
-
-        public ActionResult Details(int id)
+        public ActionResult Index() 
         {
-            var album = storeDB.Albums.Find(id);
-
-            return View(album);
+            var genres = storeDB.Genres;
+            return View(genres);
         }
+
 
         //
         // GET: /Store/GenreMenu
