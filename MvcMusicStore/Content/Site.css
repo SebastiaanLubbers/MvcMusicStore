@@ -755,12 +755,20 @@ tr.pager td {
         }
 }
 
+/**************************
+*   Music Store Additions *
+**************************/
+
 p.site-title {
-    background: url(/Content/Images/logo.png) no-repeat;
+    background: url(/Content/Images/logo.svg) no-repeat;
     vertical-align: bottom;
     font-size: 20px;
     width: 100%;
-    padding-top: 38px;
+    padding-top: 40px;
+}
+
+html.no-svg p.site-title {
+    background: url(/Content/Images/logo.png) no-repeat;
 }
 
 section.main-content, div#body {
@@ -808,12 +816,33 @@ ul#album-list {
 
     ul#album-list li {
         display: inline;
-        width: 100px;
-        height: 130px;
+        width: 105px;
+        height: 150px;
         float: left;
         text-align: center;
         margin: 10px;
+        font-weight: bold;
+        color: #5e5b54;
     }
+
+        ul#album-list li img:hover {
+            box-shadow: 1px 1px 7px #777;
+        }
+
+        ul#album-list li img {
+            box-shadow: 1px 1px 5px #999;
+            border: none;
+        }
+
+        ul#album-list li a, ul#album-details li a {
+            text-decoration:none;
+        }
+
+        ul#album-list li a:hover {
+            background: none;
+            text-shadow: 1px 1px 2px #bbb;
+            color: #363430;
+        }
 
 #categories {
     padding: 10px;
@@ -832,17 +861,18 @@ ul#album-list {
 
             #categories ul li a {
                 text-decoration: none;
-                padding: .1em .4em;
+                padding: .1em .4em .2em .4em;
                 color: #fff;
                 background-color: #3f3c37;
                 display: block;
                 margin: .1em;
-                min-width: 3.7em;
+                min-width: 4.3em;
             }
 
                 #categories ul li a:hover {
                     color: #fff;
-                    background-color: #369;
+                    background-color: hsl(40, 7%, 45%);
+                    box-shadow: 1px 1px 2px #aaa;
                 }
 
 div#album-details p {

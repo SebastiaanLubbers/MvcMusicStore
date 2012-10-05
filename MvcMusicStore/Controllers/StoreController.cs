@@ -42,7 +42,7 @@ namespace MvcMusicStore.Controllers {
         [ChildActionOnly]
         public ActionResult GenreMenu()
         {
-            var genres = storeDB.Genres.ToList();
+            var genres = storeDB.Genres.Take(9).ToList();
 
             return PartialView(genres);
         }
