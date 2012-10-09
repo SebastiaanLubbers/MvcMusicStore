@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace MvcMusicStore.Models
 {
-    [Bind(Exclude = "OrderId")]
+    [Bind(Include = "FirstName,LastName,Address,City,State,PostalCode,Country,Phone,Email")]
     public class Order
     {
         [ScaffoldColumn(false)]
