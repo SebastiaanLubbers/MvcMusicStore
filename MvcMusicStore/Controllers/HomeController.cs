@@ -15,7 +15,7 @@ namespace MvcMusicStore.Controllers
         public ActionResult Index()
         {
             // Get most popular albums
-            var albums = GetTopSellingAlbums(6);
+            var albums = GetTopSellingAlbums(7);
 
             return View(albums);
         }

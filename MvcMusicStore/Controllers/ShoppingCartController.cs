@@ -25,7 +25,7 @@ namespace MvcMusicStore.Controllers {
         }
 
         //
-        // GET: /Store/AddToCart/5
+        // GET: /ShoppingCart/AddToCart/5
 
         public ActionResult AddToCart(int id) {
 
@@ -49,7 +49,7 @@ namespace MvcMusicStore.Controllers {
 
         [HttpPost]
         public ActionResult RemoveFromCart(int id) {
-            // Remove the item from the cart
+            // Retrieve the current user's shopping cart
             var cart = ShoppingCart.GetCart(storeDB, this.HttpContext);
 
             // Get the name of the album to display confirmation
@@ -61,7 +61,7 @@ namespace MvcMusicStore.Controllers {
 
             storeDB.SaveChanges();
 
-            string removed = (itemCount>0) ? " 1 of " : string.Empty;
+            string removed = (itemCount > 0) ? " 1 copy of " : string.Empty;
 
             // Display the confirmation message
 
@@ -78,14 +78,9 @@ namespace MvcMusicStore.Controllers {
             return Json(results);
         }
 
-        //
-        // GET: /ShoppingCart/CartSummary
-
         [ChildActionOnly]
         public ActionResult CartSummary() {
             var cart = ShoppingCart.GetCart(storeDB, this.HttpContext);
-
-            //ViewData["CartCount"] = cart.GetCount();
             ViewBag.CartCount = cart.GetCount();
 
             return PartialView("CartSummary");

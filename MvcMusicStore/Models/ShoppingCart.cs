@@ -122,9 +122,6 @@ namespace MvcMusicStore.Models
             return total ?? decimal.Zero;
         }
 
-
-
-
         public int CreateOrder(Order order)
         {
             decimal orderTotal = 0;

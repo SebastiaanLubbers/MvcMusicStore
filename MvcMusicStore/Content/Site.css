@@ -760,7 +760,7 @@ tr.pager td {
 **************************/
 
 p.site-title {
-    background: url(/Content/Images/logo.svg) no-repeat;
+    background: url(../Images/logo.svg) no-repeat;
     vertical-align: bottom;
     font-size: 20px;
     width: 100%;
@@ -768,7 +768,7 @@ p.site-title {
 }
 
 html.no-svg p.site-title {
-    background: url(/Content/Images/logo.png) no-repeat;
+    background: url(../Images/logo.png) no-repeat;
 }
 
 section.main-content, div#body {
@@ -884,10 +884,20 @@ div#album-details p {
 .main-content {
     padding-top: 0;
     background-image: none;
+    padding-left: 50px;
+}
+
+header, footer {
+    padding: 0 50px;
 }
 
 footer {
-    height: inherit;
+    max-height: 25px;
+}
+
+table#cart-summary tr td {
+    border-top: 1px solid black;
+    min-width: 100px;
 }
 
 .button, input[type=submit] {

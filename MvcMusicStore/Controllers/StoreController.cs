@@ -35,14 +35,16 @@ namespace MvcMusicStore.Controllers {
             return View(genres);
         }
 
-
-        //
-        // GET: /Store/GenreMenu
-
         [ChildActionOnly]
         public ActionResult GenreMenu()
         {
-            var genres = storeDB.Genres.Take(9).ToList();
+            var genres = storeDB.Genres
+                .OrderByDescending(
+                    g => g.Albums.Sum(
+                    a => a.OrderDetails.Sum(
+                    od => od.Quantity)))
+                .Take(9)
+                .ToList();
 
             return PartialView(genres);
         }
