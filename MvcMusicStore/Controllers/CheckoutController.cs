@@ -18,6 +18,7 @@ namespace MvcMusicStore.Controllers
         {
             return View();
         }
+
         //
         // POST: /Checkout/AddressAndPayment
 
@@ -33,7 +34,8 @@ namespace MvcMusicStore.Controllers
                     StringComparison.OrdinalIgnoreCase) == false)
                 {
                     return View(order);
-                } else
+                }
+                else
                 {
                     order.Username = User.Identity.Name;
                     order.OrderDate = DateTime.Now;
@@ -52,7 +54,8 @@ namespace MvcMusicStore.Controllers
                         new { id = order.OrderId });
                 }
 
-            } catch
+            }
+            catch
             {
                 //Invalid - redisplay with errors
                 return View(order);
@@ -72,13 +75,11 @@ namespace MvcMusicStore.Controllers
             if (isValid)
             {
                 return View(id);
-            } else
+            }
+            else
             {
                 return View("Error");
             }
         }
-
-
-
     }
 }
