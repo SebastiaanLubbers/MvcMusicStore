@@ -15,32 +15,11 @@ namespace MvcMusicStore.Controllers
         public ActionResult Index()
         {
             // Get most popular albums
-            var albums = GetTopSellingAlbums(7);
+            var albums = GetTopSellingAlbums(6);
 
             return View(albums);
         }
 
-
-        //
-        // GET: /Store/Browse
-
-        public string Browse(string genre)
-        {
-            string message = HttpUtility.HtmlEncode("Store.Browse, Genre = " + genre);
-
-            return message;
-        }
-
-
-        //
-        // GET: /Store/Details
-
-        public ActionResult Details(int id)
-        {
-            var album = new Album { Title = "Album " + id };
-
-            return View(album);
-        }
 
         private List<Album> GetTopSellingAlbums(int count)
         {

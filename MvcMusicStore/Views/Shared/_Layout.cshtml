@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>@ViewBag.Title - MVC Music Store</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
@@ -22,13 +22,14 @@
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("Store", "Index", "Store")</li>
+                            @Html.Action("CartSummary", "ShoppingCart")
                         </ul>
                     </nav>
                 </div>
             </div>
         </header>
         <div id="body">
-            @{Html.RenderAction("GenreMenu", "Store");}
+            @Html.Action("GenreMenu", "Store")
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
                 @RenderBody()
@@ -38,6 +39,9 @@
             <div class="content-wrapper">
                 <div class="float-left">
                     <p><a href="http://mvcmusicstore.codeplex.com">mvcmusicstore.codeplex.com</a></p>
+                </div>
+                <div class="float-right">
+                    <p>@Html.ActionLink("Admin", "Index", "StoreManager")</p>
                 </div>
             </div>
         </footer>

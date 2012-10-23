@@ -6,10 +6,6 @@
 
 <h2>Edit</h2>
 
-@section scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
@@ -67,3 +63,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -35,14 +35,29 @@ namespace MvcMusicStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && WebSecurity.Login(
+                model.UserName, model.Password, persistCookie: model.RememberMe))
             {
+                // Migrate the user's shopping cart
+                MigrateShoppingCart(model.UserName);
                 return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
+        }
+
+        private void MigrateShoppingCart(string UserName)
+        {
+            var storeDb = new MusicStoreEntities();
+
+            // Associate shopping cart items with logged-in user
+            var cart = ShoppingCart.GetCart(storeDb, this.HttpContext);
+            cart.MigrateCart(UserName);
+            storeDb.SaveChanges();
+
+            Session[ShoppingCart.CartSessionKey] = UserName;
         }
 
         //
@@ -81,6 +96,10 @@ namespace MvcMusicStore.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+
+                    // Migrate the newly registered user's shopping cart
+                    MigrateShoppingCart(model.UserName);
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

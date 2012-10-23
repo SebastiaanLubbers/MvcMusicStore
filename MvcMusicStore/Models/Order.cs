@@ -9,7 +9,7 @@ namespace MvcMusicStore.Models
     public class Order
     {
         [ScaffoldColumn(false)]
-        public int OrderId { get; set; }
+        public int OrderId  { get; set; }
 
         [ScaffoldColumn(false)]
         public System.DateTime OrderDate { get; set; }

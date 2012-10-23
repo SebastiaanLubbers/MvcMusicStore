@@ -1,38 +1,43 @@
-﻿using System;
+﻿using MvcMusicStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MvcMusicStore.Models;
 
-namespace MvcMusicStore.Controllers {
-    public class StoreController : Controller {
+namespace MvcMusicStore.Controllers
+{
+    public class StoreController : Controller
+    {
         MusicStoreEntities storeDB = new MusicStoreEntities();
         //
         // GET: /Store/
 
-        public ActionResult Details(int id) 
+        public ActionResult Index()
         {
-            var album = storeDB.Albums.Find(id);
-            if (album == null) {
-                return HttpNotFound();
-            }
+            var genres = storeDB.Genres.ToList();
 
-            return View(album);
+            return View(genres);
         }
 
-        public ActionResult Browse(string genre) {
-            // Retrieve Genre and its Associated Albums from database
+
+        //
+        // GET: /Store/Browse?genre=Disco
+
+        public ActionResult Browse(string genre)
+        {
+            // Retrieve Genre genre and its Associated associated Albums albums from database
             var genreModel = storeDB.Genres.Include("Albums")
                 .Single(g => g.Name == genre);
 
             return View(genreModel);
         }
 
-        public ActionResult Index() 
+        public ActionResult Details(int id) 
         {
-            var genres = storeDB.Genres;
-            return View(genres);
+            var album = storeDB.Albums.Find(id);
+
+            return View(album);
         }
 
         [ChildActionOnly]
@@ -48,6 +53,5 @@ namespace MvcMusicStore.Controllers {
 
             return PartialView(genres);
         }
-
     }
 }

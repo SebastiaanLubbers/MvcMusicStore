@@ -3,14 +3,17 @@ using System.Web.Mvc;
 using MvcMusicStore.Models;
 using MvcMusicStore.ViewModels;
 
-namespace MvcMusicStore.Controllers {
-    public class ShoppingCartController : Controller {
+namespace MvcMusicStore.Controllers
+{
+    public class ShoppingCartController : Controller
+    {
         MusicStoreEntities storeDB = new MusicStoreEntities();
 
         //
         // GET: /ShoppingCart/
 
-        public ActionResult Index() {
+        public ActionResult Index()
+        {
             var cart = ShoppingCart.GetCart(storeDB, this.HttpContext);
 
             // Set up our ViewModel
@@ -27,7 +30,8 @@ namespace MvcMusicStore.Controllers {
         //
         // GET: /ShoppingCart/AddToCart/5
 
-        public ActionResult AddToCart(int id) {
+        public ActionResult AddToCart(int id)
+        {
 
             // Retrieve the album from the database
             var addedAlbum = storeDB.Albums
@@ -48,7 +52,8 @@ namespace MvcMusicStore.Controllers {
         // AJAX: /ShoppingCart/RemoveFromCart/5
 
         [HttpPost]
-        public ActionResult RemoveFromCart(int id) {
+        public ActionResult RemoveFromCart(int id)
+        {
             // Retrieve the current user's shopping cart
             var cart = ShoppingCart.GetCart(storeDB, this.HttpContext);
 
@@ -67,7 +72,7 @@ namespace MvcMusicStore.Controllers {
 
             var results = new ShoppingCartRemoveViewModel
             {
-                Message = removed + albumName + 
+                Message = removed + albumName +
                     " has been removed from your shopping cart.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
@@ -79,9 +84,16 @@ namespace MvcMusicStore.Controllers {
         }
 
         [ChildActionOnly]
-        public ActionResult CartSummary() {
+        public ActionResult CartSummary()
+        {
             var cart = ShoppingCart.GetCart(storeDB, this.HttpContext);
-            ViewBag.CartCount = cart.GetCount();
+
+            var cartItems = cart.GetCartItems()
+                .Select(a => a.Album.Title)
+                .OrderBy(x => x);
+
+            ViewBag.CartCount = cartItems.Count();
+            ViewBag.CartSummary = string.Join("\n", cartItems.Distinct());
 
             return PartialView("CartSummary");
         }
