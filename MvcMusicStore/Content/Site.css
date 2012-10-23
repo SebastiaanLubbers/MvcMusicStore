@@ -916,6 +916,11 @@ table#cart-summary tr td {
         text-decoration: none;
     }
 
+div.editor-field select {
+    height: 30px;
+    width: 310px;
+}
+
 @media only screen and (max-width: 850px) {
     p.site-title {
         background-position: center top;
